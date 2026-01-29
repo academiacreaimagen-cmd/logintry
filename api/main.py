@@ -16,6 +16,7 @@ app = FastAPI()
 # Servir archivos estáticos
 app.mount("/css", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "css")), name="css")
 app.mount("/js", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "js")), name="js")
+app.mount("/img", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "img")), name="img")
 
 # Configuración de Sesiones con Cookies Firmadas
 secret_key = os.getenv("SECRET_KEY")
