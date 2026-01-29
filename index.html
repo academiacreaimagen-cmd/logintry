@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/stylelogin.css">
+    <link rel="stylesheet" href="css/stylelogin.css?v=2">
 </head>
 <body>
     <div class="container">
-        <h2>🔐 Login</h2>
+        <h2>Login</h2>
         
         <div class="tabs">
             <button class="tab active" onclick="switchTab('login')">Login</button>
@@ -38,6 +38,20 @@
             </form>
         </div>
 
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="water-logo-container">
+            <div class="logo-wrapper">
+                <!-- SVG de fondo (gris claro) -->
+                <img src="img/file.svg" class="logo-bg" alt="Logo Background">
+                <!-- SVG que se llena (color esmeralda) -->
+                <div class="water-fill" id="water-fill">
+                    <img src="img/file.svg" class="logo-front" alt="Logo Front">
+                </div>
+            </div>
+            <h1 id="welcome-text">Bienvenida</h1>
+        </div>
     </div>
 
     <script src="js/applogin.js"></script>
