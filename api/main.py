@@ -27,9 +27,10 @@ def read_dashboard(session_user: Optional[str] = Cookie(None)):
     return FileResponse(path)
 
 @app.get("/logout")
-def logout(response: Response):
+def logout():
+    response = RedirectResponse(url="/", status_code=303)
     response.delete_cookie("session_user")
-    return RedirectResponse(url="/", status_code=303)
+    return response
 
 # CORS
 app.add_middleware(
