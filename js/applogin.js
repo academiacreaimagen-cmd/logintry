@@ -8,6 +8,12 @@ function switchTab(tab) {
     document.getElementById(`${tab}-form`).classList.add('active');
 }
 
+// Toggle Password Visibility
+document.getElementById('show-password').addEventListener('change', function() {
+    const passwordInput = document.getElementById('login-password');
+    passwordInput.type = this.checked ? 'text' : 'password';
+});
+
 // Login
 document.getElementById('formLogin').addEventListener('submit', async (e) => {
     e.preventDefault();

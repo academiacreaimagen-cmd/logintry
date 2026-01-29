@@ -4,10 +4,13 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +22,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     width: 350px;
-    transition: width 0.3s ease, padding 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 h2 {
@@ -63,6 +66,24 @@ h2 {
     margin-bottom: 20px;
 }
 
+.show-password-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.show-password-group input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+}
+
+.show-password-group label {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 label {
     display: block;
     margin-bottom: 5px;
@@ -76,6 +97,7 @@ input {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
+    transition: border-color 0.2s;
 }
 
 input:focus {
