@@ -132,7 +132,6 @@
         
         <div class="tabs">
             <button class="tab active" onclick="switchTab('login')">Login</button>
-            <button class="tab" onclick="switchTab('registro')">Registro</button>
         </div>
         
         <!-- Login -->
@@ -189,8 +188,9 @@
                     mensajeDiv.textContent = `✅ Bienvenido ${data.username}!`;
                     mensajeDiv.style.display = 'block';
                     
+                    // 🚀 Redirigir al dashboard después de 1 segundo
                     setTimeout(() => {
-                        alert('Login exitoso!');
+                        window.location.href = '/dashboard';
                     }, 1000);
                     
                 } else {

@@ -16,6 +16,12 @@ def read_index():
     path = os.path.join(os.path.dirname(__file__), '..', 'index.html')
     return FileResponse(path)
 
+@app.get("/dashboard")
+def read_dashboard():
+    # Servir el dashboard desde la raíz
+    path = os.path.join(os.path.dirname(__file__), '..', 'dashboard.html')
+    return FileResponse(path)
+
 # CORS
 app.add_middleware(
     CORSMiddleware,
