@@ -1,0 +1,7 @@
+la logiga de vinculacion deberia ser algo como
+
+if selected something from listbnox, vincular boton enable
+
+if boton enable pressed, activar switches, desactivar boton vincular hasta que se presione desvincular paquete (para no vincular dos al mismo tiempo o dos veces uno mismo)
+
+if at least 1 switch is enabled, desactivar boton desvincular paquete y quitar alumna

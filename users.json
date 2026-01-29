@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "username": "mcfly",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$FuXNM3yieVU3/MatMYmY3w$zXbWkvWKg6t+pClFduNHcDCDi0aYnXee59YGwAHQSXs"
+    },
+    {
+      "username": "admin",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$otraHashAqui..."
+    },
+    {
+      "username": "mcfly2",
+      "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$QHsslXcl9DxRFqLNdZcW2g$dnALQmkCycoC6nV1P/Hm2mGd9BBITNCMbA1Y/tXnMqU"
+    }
+  ]
+}
