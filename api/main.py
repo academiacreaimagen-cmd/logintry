@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException, Response, Cookie, Depends
+from fastapi import FastAPI, HTTPException, Response, Cookie, Depends, Request
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 from pydantic import BaseModel
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
@@ -11,6 +12,10 @@ import os
 
 app = FastAPI()
 
+# Configuración de Sesiones con Cookies Firmadas
+secret_key = os.getenv("SECRET_KEY")
+app.add_middleware(SessionMiddleware, secret_key=secret_key)
+
 @app.get("/")
 def read_index():
     # Usamos .. para salir de la carpeta /api y buscar en la raíz
@@ -18,8 +23,9 @@ def read_index():
     return FileResponse(path)
 
 @app.get("/dashboard")
-def read_dashboard(session_user: Optional[str] = Cookie(None)):
-    if not session_user:
+def read_dashboard(request: Request):
+    # Verificamos la sesión firmada
+    if not request.session.get("session_user"):
         return RedirectResponse(url="/", status_code=303)
     
     # Servir el dashboard desde la raíz
@@ -27,10 +33,10 @@ def read_dashboard(session_user: Optional[str] = Cookie(None)):
     return FileResponse(path)
 
 @app.get("/logout")
-def logout():
-    response = RedirectResponse(url="/", status_code=303)
-    response.delete_cookie("session_user")
-    return response
+def logout(request: Request):
+    # Limpiamos la sesión firmada
+    request.session.clear()
+    return RedirectResponse(url="/", status_code=303)
 
 # CORS
 app.add_middleware(
@@ -52,7 +58,7 @@ class LoginData(BaseModel):
     password: str
 
 @app.post("/api/login")
-def login(datos: LoginData, response: Response):
+def login(datos: LoginData, request: Request):
     # 1. Validar primero el usuario (¡Muy importante!)
     if datos.username != user1:
         raise HTTPException(
@@ -64,13 +70,8 @@ def login(datos: LoginData, response: Response):
     try:
         ph.verify(hash_password, datos.password)
         
-        # ✅ Login exitoso: Seteamos la cookie
-        response.set_cookie(
-            key="session_user", 
-            value=user1, 
-            httponly=True, 
-            samesite="lax"
-        )
+        # ✅ Login exitoso: Seteamos la sesión firmada
+        request.session["session_user"] = user1
         
         return {
             "success": True,
