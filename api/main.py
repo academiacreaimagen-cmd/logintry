@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Response, Cookie, Depends, Request
 from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from pydantic import BaseModel
@@ -11,6 +12,10 @@ import os
 
 
 app = FastAPI()
+
+# Servir archivos estáticos
+app.mount("/css", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "css")), name="css")
+app.mount("/js", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "js")), name="js")
 
 # Configuración de Sesiones con Cookies Firmadas
 secret_key = os.getenv("SECRET_KEY")
